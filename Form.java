@@ -4,13 +4,13 @@ import java.awt.*;
 class Form{
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.setSize(1000, 700);
+        frame.setSize(950, 700);
         frame.setTitle("Student Registration Form");
         frame.setLayout(null);
-        frame.setBackground(new Color(230, 230, 255));
+        frame.setBackground(new Color(200, 230, 255));
         
         JPanel personalInfo = new JPanel();
-        personalInfo.setBounds(10, 10, 450, 400);
+        personalInfo.setBounds(10, 10, 450, 320);
         personalInfo.setBackground(new Color(245, 245, 255));
         personalInfo.setLayout(null);
 
@@ -123,6 +123,93 @@ class Form{
         departmentPanel.add(departmentComboBox);
 
         frame.add(departmentPanel);
+        
+        JPanel programmingSkillsPanel = new JPanel();
+        programmingSkillsPanel.setLayout(null);
+        programmingSkillsPanel.setBounds(470, 110, 450, 220);
+        programmingSkillsPanel.setBackground(new Color(245, 245, 255));
+
+        JLabel programmingSkillsLabel = new JLabel("Programming Skills (Select all that apply)");
+        programmingSkillsLabel.setBounds(10, -5, 300, 30);
+        programmingSkillsPanel.add(programmingSkillsLabel);
+        
+        JCheckBox javaCheckBox = new JCheckBox("Java");
+        javaCheckBox.setBounds(10, 20, 100, 30);
+        programmingSkillsPanel.add(javaCheckBox);
+        JCheckBox cppCheckBox = new JCheckBox("C++");
+        cppCheckBox.setBounds(10, 55, 100, 30);
+        programmingSkillsPanel.add(cppCheckBox);
+        JCheckBox pythonCheckBox = new JCheckBox("Python");
+        pythonCheckBox.setBounds(10, 90, 100, 30);
+        programmingSkillsPanel.add(pythonCheckBox);
+        JCheckBox jsCheckBox = new JCheckBox("JavaScript");
+        jsCheckBox.setBounds(10, 125, 100, 30);
+        programmingSkillsPanel.add(jsCheckBox);
+
+        JCheckBox otherCheckBox = new JCheckBox("Other");
+        otherCheckBox.setBounds(10, 160, 100, 30);
+        programmingSkillsPanel.add(otherCheckBox);
+        JTextField otherInput = new JTextField(20);
+        otherInput.setBounds(115, 160, 320, 30);
+        programmingSkillsPanel.add(otherInput);
+
+        frame.add(programmingSkillsPanel);
+
+        JPanel courseSelection = new JPanel();
+        courseSelection.setBounds(10, 340, 500, 200);
+        courseSelection.setLayout(null);
+        courseSelection.setBackground(new Color(245, 245, 255));
+        JLabel course = new JLabel("Course Selection");
+        course.setBounds(10, -5, 200, 30);
+        courseSelection.add(course);
+
+        String[] courses = {"Data Structure", "Object Oriented Programming", "DataBase System", "Operating System", "Web Development"};
+
+        JLabel selectCourseLabel = new JLabel("Select Courses: ");
+        selectCourseLabel.setBounds(10, 10, 100, 30);
+        courseSelection.add(selectCourseLabel);
+
+        JPanel courseList = new JPanel();
+        courseList.setBounds(130, 40, 200, 150);
+        courseList.setLayout(null);
+        courseSelection.add(courseList);
+        for (int i = 0; i < courses.length; i++) {
+            JCheckBox courseCheckBox = new JCheckBox(courses[i]);
+            courseCheckBox.setBounds(10, 20 + i * 30, 150, 30);
+            courseList.add(courseCheckBox);
+        }
+
+        frame.add(courseSelection);
+
+        JPanel addressPanel = new JPanel();
+        addressPanel.setBounds(520, 340, 400, 200);
+        addressPanel.setLayout(null);
+        addressPanel.setBackground(new Color(245, 245, 255));
+
+        JLabel addressLabel = new JLabel("Address");
+        addressLabel.setBounds(10, -5, 100, 30);
+        addressPanel.add(addressLabel);
+        JTextArea addressInput = new JTextArea();
+        addressInput.setBounds(10, 30, 380, 150);
+        addressPanel.add(addressInput);
+
+        frame.add(addressPanel);
+
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBounds(10, 550, 910, 50);
+        buttonsPanel.setLayout(null);
+        JButton submitButton = new JButton("Submit");
+        submitButton.setBounds(10, 10, 100, 30);    
+        buttonsPanel.add(submitButton);
+        JButton clearButton = new JButton("Clear");
+        clearButton.setBounds(120, 10, 100, 30);
+        buttonsPanel.add(clearButton);
+        frame.add(buttonsPanel);
+        JButton exitButton = new JButton("Exit");
+        exitButton.setBounds(230, 10, 100, 30);
+        buttonsPanel.add(exitButton);
+        exitButton.addActionListener(e -> System.exit(0));  
+        
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
