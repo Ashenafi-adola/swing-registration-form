@@ -4,10 +4,10 @@ import java.awt.*;
 class Form{
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.setSize(950, 700);
+        frame.setSize(950, 650);
         frame.setTitle("Student Registration Form");
         frame.setLayout(null);
-        frame.setBackground(new Color(200, 230, 255));
+        frame.setBackground(new Color(200, 200, 255));
         
         JPanel personalInfo = new JPanel();
         personalInfo.setBounds(10, 10, 450, 320);
@@ -196,20 +196,44 @@ class Form{
         frame.add(addressPanel);
 
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBounds(10, 550, 910, 50);
+        buttonsPanel.setBounds(300, 550, 910, 50);
         buttonsPanel.setLayout(null);
-        JButton submitButton = new JButton("Submit");
-        submitButton.setBounds(10, 10, 100, 30);    
+        JButton submitButton = new JButton("📄 Submit");
+        submitButton.setBounds(10, 10, 100, 30);   
+        submitButton.setBackground(new Color(50, 60, 230));
+        submitButton.setForeground(new Color(255, 255, 255));
         buttonsPanel.add(submitButton);
-        JButton clearButton = new JButton("Clear");
+        JButton clearButton = new JButton("🖋️  Clear");
         clearButton.setBounds(120, 10, 100, 30);
+        clearButton.setBackground(new Color(240, 245, 0));
         buttonsPanel.add(clearButton);
         frame.add(buttonsPanel);
-        JButton exitButton = new JButton("Exit");
+        JButton exitButton = new JButton("❌  Exit");
         exitButton.setBounds(230, 10, 100, 30);
+        exitButton.setBackground(new Color(240, 20, 10));
         buttonsPanel.add(exitButton);
         exitButton.addActionListener(e -> System.exit(0));  
-        
+
+        submitButton.addActionListener(e -> {
+            String name = nameInput.getText();
+            String studentIdText = idInput.getText();
+            String passwordText = new String(password.getPassword());
+            String departmentText = (String) departmentComboBox.getSelectedItem();
+            String gender = null;
+            if (male.isSelected())  gender = "Male";
+            else if(female.isSelected()) gender = "Female";
+            String birthday = birthdayInput.getText();
+            String email = emailInput.getText();
+            int phoneNumber = Integer.parseInt(phoneInput.getText());
+
+            
+            System.out.println(name);
+            System.out.println(studentIdText);
+            System.out.println(passwordText);
+            System.out.println(gender);
+
+            System.out.println(departmentText);
+        });
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
