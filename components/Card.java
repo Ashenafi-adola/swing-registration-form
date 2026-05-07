@@ -1,8 +1,12 @@
+/*
+a card to remove the repeatitive boxes on the form with different sizes
+*/
+
 package components;
 
 import javax.swing.*;
 import java.awt.*;
-
+//defined a class that inheretes from built in swing JPanel to customize it
 public class Card extends JPanel {
     public Card(String title, int x, int y, int w, int h){
         this.setBounds(x, y, w, h);

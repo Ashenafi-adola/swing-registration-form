@@ -1,7 +1,11 @@
+/*
+this class is used to reduce code repeatition 
+*/
 package components;
 
 import javax.swing.*;
-
+//defined a custom panel that inherete from the built in swing JPanel
+//used to remove repeatition of input field in the personal information section of the form
 public class CustomPanel extends JPanel {
     private JTextField textField = null;
     private JPasswordField passwordField = null;
@@ -16,6 +20,7 @@ public class CustomPanel extends JPanel {
         JLabel label = new JLabel(title);
         label.setBounds(10, 5, 100, 30);
         this.add(label);
+        //conditions cheking for the type of the input field
         if ("password".equals(inputType)) {
             passwordField = new JPasswordField(20);
             passwordField.setBounds(110, 5, 320, 30);
@@ -36,8 +41,9 @@ public class CustomPanel extends JPanel {
             this.add(textField);
         }
     }
-
+    //defined a method that return the input value of each instance of this class
     public String getUserInput() {
+        //condition chacking for the type of the input field
         if ("password".equals(inputType) && passwordField != null) {
             return new String(passwordField.getPassword());
         } else if ("radio".equals(inputType) && maleRadio != null && femaleRadio != null) {
@@ -53,7 +59,9 @@ public class CustomPanel extends JPanel {
         }
         return "";
     }
+    //a method to clear the input 
     public void clearInput() {
+        //condition chacking for the type of the input field
         if (inputType == "password"){
             passwordField.setText("");
         }else if(inputType == "text"){

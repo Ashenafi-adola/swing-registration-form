@@ -5,18 +5,23 @@ import java.util.ArrayList;
 
 class Form{
     public static void main(String[] args) {
+        //instialized a JFrame that holds everything seen on window
         JFrame frame = new JFrame();
         frame.setSize(965, 670);
         frame.setTitle("Student Registration Form");
         frame.setLayout(null);
         frame.setBackground(new Color(200, 200, 255));
         
+        //initialized a Form with JPanel that holds every input fields
         JPanel form = new JPanel();
         form.setBounds(10, 10, 930, 610);
         form.setLayout(null);
         form.setBackground(new Color(100, 120, 255));
+
+        //intialized Card that records personal informations
         Card personalInfo = new Card("Personal Information", 10, 10, 450, 320);
 
+        //intialized and added every input fields in the personal information card
         CustomPanel namePanel = new CustomPanel("Full Name",  "text", 10, 30);
         personalInfo.add(namePanel);
         CustomPanel idPanel = new CustomPanel("Student ID", "text", 10, 70);
@@ -34,6 +39,7 @@ class Form{
 
         form.add(personalInfo);
 
+        //instatiated department panel for selecting departments
         Card departmentPanel = new Card("Department",470, 30, 450, 70);
         
         JLabel department = new JLabel("Department: ");
@@ -45,6 +51,7 @@ class Form{
         departmentPanel.add(departmentComboBox);
         form.add(departmentPanel);
         
+        //intialized a card for selecting programming skills
         Card programmingSkillsPanel = new Card("Programming Skills (Select all that apply)",470, 110, 450, 220);
 
         JPanel languagesList = new JPanel();
@@ -52,7 +59,7 @@ class Form{
         languagesList.setLayout(null);
         
         String[] programmingLanguages = {"Java", "C++", "Python", "JavaScript", "Other"};
-
+        //iterate through programming languages and put them on the specified place
         for (int i = 0; i < programmingLanguages.length; i++){
             JCheckBox checkBox = new JCheckBox(programmingLanguages[i]);
             checkBox.setBounds(10, 20 + i * 35, 100, 30);
@@ -65,38 +72,36 @@ class Form{
         programmingSkillsPanel.add(languagesList);
         form.add(programmingSkillsPanel);
 
-        JPanel courseSelection = new JPanel();
-        courseSelection.setBounds(10, 340, 500, 200);
-        courseSelection.setLayout(null);
-        courseSelection.setBackground(new Color(245, 245, 255));
-        JLabel course = new JLabel("Course Selection");
-        course.setBounds(10, -5, 200, 30);
-        courseSelection.add(course);
+        // instantiated a course selection card for seelecting courses
+        Card courseSelectionCard = new Card("Course Selection", 10, 340, 500, 200);
 
         String[] courses = {"Data Structure", "Object Oriented Programming", "DataBase System", "Operating System", "Web Development"};
 
         JLabel selectCourseLabel = new JLabel("Select Courses: ");
         selectCourseLabel.setBounds(10, 10, 100, 30);
-        courseSelection.add(selectCourseLabel);
+        courseSelectionCard.add(selectCourseLabel);
 
         JPanel courseList = new JPanel();
         courseList.setBounds(130, 40, 200, 150);
         courseList.setLayout(null);
-        courseSelection.add(courseList);
+        courseSelectionCard.add(courseList);
+        //iterate through courses to palace them on the specified place
         for (int i = 0; i < courses.length; i++) {
             JCheckBox courseCheckBox = new JCheckBox(courses[i]);
             courseCheckBox.setBounds(10, 20 + i * 30, 150, 30);
             courseList.add(courseCheckBox);
         }
 
-        form.add(courseSelection);
-
+        form.add(courseSelectionCard);
+        //instantiated address Card
         Card addressCard = new Card("Address", 520, 340, 400, 200);
         JTextArea addressInput = new JTextArea();
         addressInput.setBounds(10, 30, 380, 150);
         addressCard.add(addressInput);
 
         form.add(addressCard);
+
+        //instantiated a Card for Action buttons to submit clear and exit the form
         Card buttonsCard = new Card(null, 300, 550, 340, 50);
 
         JButton submitButton = new JButton("📄 Submit");
@@ -116,12 +121,13 @@ class Form{
         buttonsCard.add(exitButton);
 
         frame.add(form);
+        //added event listner to exit button to close the window
         exitButton.addActionListener(e -> System.exit(0));  
-        
+        //added event listner to the submit button to submit and display the inserted informations
         submitButton.addActionListener(e -> {
             ArrayList<String> selectedLanguages = new ArrayList<>();
             ArrayList<String> selectedCourses = new ArrayList<>();
-            
+            //iterate through the language list child components and check which language is selected
             for (Component comp : languagesList.getComponents()){
                 if(comp instanceof JCheckBox){
                     if(((JCheckBox) comp).isSelected() && ((JCheckBox) comp).getText().equals("Other")){
@@ -134,13 +140,14 @@ class Form{
                     }
                 }
             }
+            //iterate through the course list child components and check which language is selected
             for (Component comp : courseList.getComponents()) {
                 if(((JCheckBox) comp).isSelected()){
                     String selectedCourse = ((JCheckBox) comp).getText();
                     selectedCourses.add(selectedCourse);
                 }
             }
-
+            //message to be displayd on the dilogue box
             String message = "Name: " + namePanel.getUserInput() + "\n" +
                              "Student ID: " + idPanel.getUserInput() + "\n" +
                              "Password: " + passwordPanel.getUserInput() + "\n" +
@@ -152,9 +159,10 @@ class Form{
                              "Department: " + (String) departmentComboBox.getSelectedItem() + "\n" +
                              "Selected Courses: " + String.join(", ", selectedCourses) + "\n" +
                              "Address: " + addressInput.getText();
+            //display the message to dilogue box
             JOptionPane.showMessageDialog(frame, message, "Registration Details", JOptionPane.INFORMATION_MESSAGE);
         });
-
+        //added event listener to the clear form button to clear the form
         clearButton.addActionListener(e -> {
             namePanel.clearInput();
             idPanel.clearInput();
@@ -163,7 +171,7 @@ class Form{
             birthdayPanel.clearInput();
             emailPanel.clearInput();
             phonePanel.clearInput();
-
+            //iterate through the language list child components and unselect the language if selected
             for (Component comp : languagesList.getComponents()){
                 if(comp instanceof JCheckBox){
                     if(((JCheckBox) comp).isSelected() && ((JCheckBox) comp).getText().equals("Other")){
@@ -175,6 +183,7 @@ class Form{
                     otherInput.setText("");
                 }
             }
+            //iterate through the course list child components and unselect the course if selected
             for (Component comp : courseList.getComponents()) {
                 if(((JCheckBox) comp).isSelected()){
                     ((JCheckBox) comp).setSelected(false);
