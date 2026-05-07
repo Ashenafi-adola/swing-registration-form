@@ -53,4 +53,12 @@ public class CustomPanel extends JPanel {
         }
         return "";
     }
+    public void clearInput() {
+        if (inputType == "password"){
+            passwordField.setText("");
+        }else if(inputType == "text"){
+            textField.setText("");
+        }
+
+    }
 }
